@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheber Presentes | Loja de Presentes</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --rosa: #d94f87;
+  --rosa-claro: #fff0f5;
+  --escuro: #29212a;
+  --verde: #168b50;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: var(--escuro);
+}
+
+header {
+  background: #000;
+  color: white;
+  padding: 25px 6%;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 15px;
+}
+
+nav {
+  background: white;
+  padding: 15px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  box-shadow: 0 2px 8px #00000012;
+}
+
+nav a {
+  color: var(--escuro);
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 12px;
+}
+
+.banner {
+  padding: 55px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #808080, #ffffff);
+}
+
+.banner h2 {
+  font-size: clamp(27px, 5vw, 42px);
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.banner p {
+  margin-bottom: 22px;
+}
+
+.botao {
+  display: inline-block;
+  background: #000 ;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.botao:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+
+.container {
+  max-width: 1200px;
+  padding: 35px 20px;
+  margin: auto;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 29px;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.produto {
+  background: white;
+  border: 1px solid #f0dce5;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px #00000008;
+  display: flex;
+  flex-direction: column;
+}
+
+.produto-visual {
+  height: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #808080, #ffffff);
+  font-size: 78px;
+}
+
+.produto-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.produto h3 {
+  font-size: 18px;
+  margin-bottom: 9px;
+}
+
+.descricao {
+  color: #777;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.preco {
+  font-size: 23px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+select, input, textarea {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  background: white;
+  font-size: 14px;
+  margin-bottom: 13px;
+}
+
+.produto .botao {
+  width: 100%;
+  margin-top: auto;
+}
+
+.carrinho {
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  border: 1px solid #f0dce5;
+  box-shadow: 0 4px 14px #00000008;
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-carrinho strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.item-carrinho small {
+  color: #777;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controles button {
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #ffe1ed;
+  font-weight: bold;
+}
+
+.controles .remover {
+  background: #ffe7e7;
+  color: #b42323;
+}
+
+.total {
+  text-align: right;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 22px 0;
+}
+
+.dados-cliente {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dados-cliente .campo {
+  min-width: 0;
+}
+
+.dados-cliente .campo.completo {
+  grid-column: 1 / -1;
+}
+
+.finalizar {
+  width: 100%;
+  background: var(--verde);
+  font-size: 17px;
+}
+
+.vazio {
+  color: #777;
+  padding: 20px 0;
+}
+
+.aviso {
+  font-size: 13px;
+  color: #777;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  background: #30232b;
+  color: white;
+  padding: 25px 15px;
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 26px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 5px 8px;
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 28px 14px;
+  }
+
+  .item-carrinho {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .dados-cliente {
+    grid-template-columns: 1fr;
+  }
+
+  .dados-cliente .campo.completo {
+    grid-column: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>JC Decoração</h1>
+  <p>Presentes personalizados feitos com carinho!</p>
+</header>
+
+<nav>
+  <a href="#inicio">Início</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#carrinho">Meu carrinho 🛒</a>
+</nav>
+
+<section class="banner" id="inicio">
+  <h2>Surpreenda quem você ama! 💝</h2>
+  <p>Presentes especiais para transformar momentos em lembranças.</p>
+  <a class="botao" href="#produtos">Ver produtos</a>
+</section>
+
+<main>
+  <section class="container" id="produtos">
+    <h2 class="titulo">Nossos produtos</h2>
+    <p class="subtitulo">Escolha seu presente e personalize seu pedido.</p>
+
+    <div class="produtos" id="lista-produtos"></div>
+  </section>
+
+  <section class="container" id="carrinho">
+    <h2 class="titulo">🛒 Meu carrinho</h2>
+    <p class="subtitulo">Confira seus produtos antes de finalizar.</p>
+
+    <div class="carrinho">
+      <div id="itens-carrinho">
+        <p class="vazio">Seu carrinho está vazio.</p>
+      </div>
+
+      <div class="total">
+        Total: <span id="total">R$ 0,00</span>
+      </div>
+
+      <h3 style="margin-bottom: 18px;">Dados para o pedido</h3>
+
+      <form id="form-pedido">
+        <div class="dados-cliente">
+          <div class="campo">
+            <label for="nome">Seu nome *</label>
+            <input id="nome" type="text" placeholder="Nome completo" required>
+          </div>
+
+          <div class="campo">
+            <label for="entrega">Tipo de entrega *</label>
+            <select id="entrega" required>
+              <option value="">Selecione</option>
+              <option value="Retirada">Retirada</option>
+              <option value="Entrega">Entrega</option>
+            </select>
+          </div>
+
+          <div class="campo completo">
+            <label for="endereco">Endereço de entrega (se necessário)</label>
+            <input id="endereco" type="text" placeholder="Rua, número e bairro">
+          </div>
+
+          <div class="campo completo">
+            <label for="observacoes">Observações e personalização</label>
+            <textarea id="observacoes" rows="3"
+              placeholder="Ex.: nome na caneca, cor das flores, frase do álbum..."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="botao finalizar">
+          📲 Finalizar pedido pelo WhatsApp
+        </button>
+
+        <p class="aviso">
+          Ao clicar, o WhatsApp será aberto com os detalhes do seu pedido.
+          A compra será confirmada diretamente com a loja.
+          O frete e a forma de pagamento serão combinados pelo WhatsApp.
+        </p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p><strong>JC Decoração 🎁</strong></p>
+  <p>Presentes personalizados para momentos inesquecíveis.</p>
+</footer>
+
+<script>
+const WHATSAPP = "5564992691320";
+
+const produtos = [
+  {
+    id: 1,
+    nome: "Buquê de cetim",
+    emoji: "💐",
+    descricao: "Buquês delicados feitos com flores de cetim.",
+    opcoes: [
+      { nome: "Com 100 Rosas", preco: 300 },
+      { nome: "Com 50 Rosas", preco: 150 },
+      { nome: "Com 25 Rosas", preco: 74 },
+      { nome: "Com 15 Rosas", preco: 50 },
+      { nome: "Com 10 Rosas", preco: 40 },
+    ]
+  },
+  {
+    id: 2,
+    nome: "Buquê de EVA",
+    emoji: "💐",
+    descricao: "Buquês de EVA para presentear em qualquer ocasião.",
+    opcoes: [
+      { nome: "Com 100 Rosas", preco: 250 },
+      { nome: "Com 50 Rosas", preco: 100 },
+      { nome: "Com 25 Rosas", preco: 50 },
+      { nome: "Com 15 Rosas", preco: 25 },
+      { nome: "Com 10 Rosas", preco: 20 },
+    ]
+  },
+  {
+    id: 3,
+    nome: "Roda-gigante de palito",
+    emoji: "🎡",
+    descricao: "Um presente criativo e personalizado.",
+    opcoes: [
+      { nome: "Modelo padrão", preco: 50 },
+    ]
+  },
+  {
+    id: 4,
+    nome: "Álbum",
+    emoji: "📔",
+    descricao: "Guarde fotos, mensagens e lembranças especiais.",
+    opcoes: [
+      { nome: "Pequeno", preco: 68 },
+      { nome: "Médio", preco: 85 },
+      { nome: "Grande", preco: 100 }
+    ]
+  },
+  {
+    id: 5,
+    nome: "Caneca personalizada",
+    emoji: "☕",
+    descricao: "Canecas personalizadas com nome, frase ou foto.",
+    opcoes: [
+      { nome: "Com nome ou frase", preco: 60 },
+      { nome: "Com foto personalizada", preco: 65 }
+    ]
+  }
+];
+
+let carrinho = [];
+
+function moeda(valor) {
+  return valor.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
+}
+
+function carregarProdutos() {
+  const lista = document.getElementById("lista-produtos");
+
+  lista.innerHTML = produtos.map(produto => `
+    <article class="produto">
+      <div class="produto-visual" aria-hidden="true">
+        ${produto.emoji}
+      </div>
+
+      <div class="produto-info">
+        <h3>${produto.nome}</h3>
+        <p class="descricao">${produto.descricao}</p>
+
+        <label for="opcao-${produto.id}">Escolha a opção</label>
+        <select id="opcao-${produto.id}">
+          ${produto.opcoes.map((opcao, i) => `
+            <option value="${i}">
+              ${opcao.nome} — ${moeda(opcao.preco)}
+            </option>
+          `).join("")}
+        </select>
+
+        <p class="preco" id="preco-${produto.id}">
+          ${moeda(produto.opcoes[0].preco)}
+        </p>
+
+        <button class="botao"
+          type="button"
+          onclick="adicionarCarrinho(${produto.id})">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    </article>
+  `).join("");
+
+  produtos.forEach(produto => {
+    const seletor = document.getElementById(`opcao-${produto.id}`);
+
+    seletor.addEventListener("change", () => {
+      const opcao = produto.opcoes[Number(seletor.value)];
+
+      document.getElementById(`preco-${produto.id}`).textContent =
+        moeda(opcao.preco);
+    });
+  });
+}
+
+function adicionarCarrinho(id) {
+  const produto = produtos.find(p => p.id === id);
+  const seletor = document.getElementById(`opcao-${id}`);
+  const opcao = produto.opcoes[Number(seletor.value)];
+
+  const existente = carrinho.find(item =>
+    item.id === id && item.opcao === opcao.nome
+  );
+
+  if (existente) {
+    existente.quantidade++;
+  } else {
+    carrinho.push({
+      id: produto.id,
+      nome: produto.nome,
+      opcao: opcao.nome,
+      preco: opcao.preco,
+      quantidade: 1
+    });
+  }
+
+  atualizarCarrinho();
+
+  document.getElementById("carrinho").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function alterarQuantidade(indice, variacao) {
+  if (!carrinho[indice]) return;
+
+  carrinho[indice].quantidade += variacao;
+
+  if (carrinho[indice].quantidade <= 0) {
+    carrinho.splice(indice, 1);
+  }
+
+  atualizarCarrinho();
+}
+
+function removerItem(indice) {
+  carrinho.splice(indice, 1);
+  atualizarCarrinho();
+}
+
+function calcularTotal() {
+  return carrinho.reduce(
+    (soma, item) => soma + item.preco * item.quantidade,
+    0
+  );
+}
+
+function atualizarCarrinho() {
+  const area = document.getElementById("itens-carrinho");
+
+  if (carrinho.length === 0) {
+    area.innerHTML = '<p class="vazio">Seu carrinho está vazio.</p>';
+  } else {
+    area.innerHTML = carrinho.map((item, indice) => `
+      <div class="item-carrinho">
+        <div>
+          <strong>${item.nome}</strong>
+          <small>${item.opcao} · ${moeda(item.preco)} cada</small>
+          <p style="margin-top: 6px; font-weight: bold;">
+            Subtotal: ${moeda(item.preco * item.quantidade)}
+          </p>
+        </div>
+
+        <div class="controles">
+          <button type="button"
+            aria-label="Diminuir quantidade"
+            onclick="alterarQuantidade(${indice}, -1)">−</button>
+
+          <span>${item.quantidade}</span>
+
+          <button type="button"
+            aria-label="Aumentar quantidade"
+            onclick="alterarQuantidade(${indice}, 1)">+</button>
+
+          <button type="button" class="remover"
+            onclick="removerItem(${indice})">Excluir</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("total").textContent = moeda(calcularTotal());
+}
+
+document.getElementById("form-pedido").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  if (carrinho.length === 0) {
+    alert("Adicione pelo menos um produto ao carrinho.");
+    return;
+  }
+
+  const nome = document.getElementById("nome").value.trim();
+  const entrega = document.getElementById("entrega").value;
+  const endereco = document.getElementById("endereco").value.trim();
+  const observacoes = document.getElementById("observacoes").value.trim();
+
+  if (!nome || !entrega) {
+    alert("Preencha seu nome e escolha o tipo de entrega.");
+    return;
+  }
+
+  if (entrega === "Entrega" && !endereco) {
+    alert("Informe o endereço para a entrega.");
+    return;
+  }
+
+  let mensagem = `Olá! Quero fazer um pedido na Sheber Presentes.\n\n`;
+  mensagem += `*CLIENTE:* ${nome}\n\n`;
+  mensagem += `*PRODUTOS:*\n`;
+
+  carrinho.forEach(item => {
+    mensagem += `• ${item.nome} (${item.opcao})\n`;
+    mensagem += `  Quantidade: ${item.quantidade}\n`;
+    mensagem += `  Subtotal: ${moeda(item.preco * item.quantidade)}\n\n`;
+  });
+
+  mensagem += `*TOTAL DOS PRODUTOS: ${moeda(calcularTotal())}*\n`;
+  mensagem += `*TIPO DE ENTREGA:* ${entrega}\n`;
+
+  if (endereco) {
+    mensagem += `*ENDEREÇO:* ${endereco}\n`;
+  }
+
+  if (observacoes) {
+    mensagem += `*PERSONALIZAÇÃO/OBSERVAÇÕES:* ${observacoes}\n`;
+  }
+
+  mensagem += `\nPor favor, confirme a disponibilidade, o frete e as formas de pagamento.`;
+
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
+
+  const janela = window.open(url, "_blank");
+
+  if (!janela) {
+    window.location.href = url;
+  }
+});
+
+carregarProdutos();
+atualizarCarrinho();
+</script>
+
+</body>
+</html>
