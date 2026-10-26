@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sheber Presentes | Loja de Presentes</title>
+<title>JC Decoração | Loja de Presentes</title>
 
 <style>
 * {
@@ -628,7 +628,7 @@ document.getElementById("form-pedido").addEventListener("submit", function(event
     return;
   }
 
-  let mensagem = `Olá! Quero fazer um pedido na Sheber Presentes.\n\n`;
+  let mensagem = `Olá! Quero fazer um pedido na JC Decoração.\n\n`;
   mensagem += `*CLIENTE:* ${nome}\n\n`;
   mensagem += `*PRODUTOS:*\n`;
 
@@ -649,7 +649,7 @@ document.getElementById("form-pedido").addEventListener("submit", function(event
     mensagem += `*PERSONALIZAÇÃO/OBSERVAÇÕES:* ${observacoes}\n`;
   }
 
-  mensagem += `\nPor favor, confirme a disponibilidade, o frete e as formas de pagamento.`;
+  mensagem += `\nPor favor, confirme o pedido, o local e as formas de pagamento.`;
 
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
 
